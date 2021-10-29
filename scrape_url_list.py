@@ -1,3 +1,9 @@
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+from time import strftime
+import numpy as np
+
 def get_new_links():
     '''
     Scrapes links from page and filters out non-github links
