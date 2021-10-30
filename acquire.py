@@ -16,7 +16,7 @@ from typing import Dict, List, Optional, Union, cast
 import requests
 
 from env import github_token, github_username
-from customer_repo_list import repos
+from most_forked_repos import repos
 
 # TODO: Make a github personal access token.
 #     1. Go here and generate a personal access token https://github.com/settings/tokens
