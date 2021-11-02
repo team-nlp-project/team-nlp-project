@@ -1,5 +1,8 @@
 ####### NLP MODELING MODULE #######
 
+import pandas as pd
+from sklearn.metrics import classification_report, accuracy_score
+
 ###################### Model Metrics Function ######################
 def model_metrics(X, y, model, data_set = 'data_set'):
     """
