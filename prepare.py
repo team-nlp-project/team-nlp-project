@@ -41,6 +41,32 @@ def remove_stopwords(some_string, extra_words = [], exclude_words = []):
     some_string_without_stopwords = ' '.join(filtered_words)
     return some_string_without_stopwords
 
+
+def remove_stopwords_set(string, extra_words = [], exclude_words = []):
+    '''
+    This function takes in a string, optional extra_words and exclude_words parameters
+    with default empty lists and returns a string.
+    '''
+    # Create stopword_list.
+    stopword_list = stopwords.words('english')
+    
+    # Remove 'exclude_words' from stopword_list to keep these in my text.
+    stopword_list = set(stopword_list) - set(exclude_words)
+    
+    # Add in 'extra_words' to stopword_list.
+    stopword_list = stopword_list.union(set(extra_words))
+
+    # Split words in string.
+    words = string.split()
+    
+    # Create a list of words from my string with stopwords removed and assign to variable.
+    filtered_words = [word for word in words if word not in stopword_list]
+    
+    # Join words in the list back into strings and assign to a variable.
+    string_without_stopwords = ' '.join(filtered_words)
+    
+    return string_without_stopwords
+
 def lemmatize(some_string):
     '''
     Takes in a string and returns a string with all words lemmatized
@@ -63,7 +89,7 @@ def prep_nlp(df, original_text_col = 'original', extra_words = [], exclude_words
     '''
     Take in df with raw content, create new columns for cleaned content, stemmed content, and lemmatized content
     '''
-    df['clean'] = df[original_text_col].apply(basic_clean).apply(tokenize).apply(remove_stopwords, extra_words, exclude_words)
+    df['clean'] = df[original_text_col].apply(basic_clean).apply(tokenize).apply(remove_stopwords_set, extra_words = extra_words, exclude_words = exclude_words)
     df['stemmed'] = df.clean.apply(stem)
     df['lemmatized'] = df.clean.apply(lemmatize)
     df = df.dropna()
