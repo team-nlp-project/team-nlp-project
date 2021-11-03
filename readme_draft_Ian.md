@@ -40,10 +40,8 @@
 
 - Create machine learning models that determine the programming language used within Github repos
 - Analyze the repo's readme's with natural language processing (NLP) techniques
-- Acquire the data from Github by web scraping
 - Document each stage of the data science pipeline for this project
 - Document code, hypothesises, statistical testing, exploration, modeling, key findings, and takeaways
-- Improve reproducibility by storing complex functions in modules
 
 #### Conclusions and Takeaways 
 
@@ -94,31 +92,19 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [(Back to top)](#table-of-contents)
 
 ---
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-| Feature                        | Description                                                                                                            | Data Type | Notes |
-| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------- | --------- | ------------- |
-| `back_legroom`                  |  Legroom in the rear seat (inches)                                                          |   float     |   Used in model    |
-| `city_fuel_economy`                  |  Gas mileage in city (mpg)                                                        |   float     |   Used in model    |
-| `engine_displacement`                  |  measure of the cylinder volume of engine (cubic centimeters)                                                       |   float     |   Used in model    |
-| `fuel_tank_volume`                  |  Volume of fuel tank (gallons)                                                          |   float     |   Used in model    |
-| `height`                  |  Height of vehicle (inches)                                                        |   float     |   Used in model    |
-| `highway_fuel_economy`                  |  Gas mileage in highway (mpg)                                                       |   float     |   Used in model    |
-| `horsepower`                  |  Measure of engine power                                                          |   float     |   Used in model    |
-| `length`                  |  Length of vehicle (inches)                                                         |   float     |   Used in model    |
-| `maximum_seating`                  |  Total number of seats                                                         |   float     |   Used in model    |
-| `mileage`                  |  Mileage of vehicle (miles)                                                          |   float     |   Used in model    |
-| `wheelbase`                  |  Distance between centers of front and rear wheels (inches)                                                         |   float     |   Used in model    |
-| `width`                  |  Width of vehicle (inches)                                                        |   float     |   Used in model    |
-| `year`                  |  Year car was released                                                         |   int     |   Used in model    |
-
-
----
-| Target | Definition | Data Type | Notes |
-| ----- | ----- | ----- | ----- |
-| `price` | Sales price of used car | float | Value being predicted |
-
+| Word | Definition | 
+| ----- | ----- | 
+| Javascript| A programming language |
+| Java | A programming language |
+| Python | A programming language |
+| C++ | A programming language |
+| Other | Placeholder for all other programming languages not specifically named |
+| Repo | A feature holding the repository url for the file on Github |
+| language | A feature holding the programming language of the repo |
+| readme_contents | A feature holding the text within the readme |
+| clean | An engineered feature holding readme contents that were cleaned |
+| stemmed | An engineered feature holding readme contents that were cleande and stemmed |
+| lemmatized | An engineered feature holding readme contents that were cleaned lemmatized |
 ---
 
 #### Initial Questions
@@ -133,10 +119,8 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 [(Back to top)](#table-of-contents)
 
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-- See notebook for formal hypotheses and statistical testing
+- H0 = The text of the readme can't be used to predict the programming language of the repo
+- Ha = The text of the readme can be used to predict the programming language of the repo
 
 ---
 
@@ -166,44 +150,31 @@ ___
 
 [(Back to top)](#table-of-contents)
 
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-- Store functions that are needed to acquire data from Kaggle; make sure the acquire.py module contains the necessary imports to run my code.
-- The final function will return a pandas DataFrame.
-- Import the acquire function from the acquire.py module and use it to acquire the data in the Final Report Notebook.
-- Complete some initial data summarization (`.info()`, `.describe()`, `.shape()`, ...).
+- Acquired the raw data by web-scraping Github
+- Used the Github proprietary API for web-scaping Github
+- The raw data for each repo included the URL, the readme, and the programming language
+- A local copy of the raw data was cached
 ___
 
 ##### Prepare
 
 [(Back to top)](#table-of-contents)
 
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-- Store functions needed to prepare the data; make sure the module contains the necessary imports to run the code. The final function should do the following:
-    - Split the data into train/validate/test.
-    - Handle any missing values.
-    - Handle erroneous data and/or outliers that need addressing.
-    - Encode variables as needed.
-    - Identify unit measures and decide how to best scale any numeric data
-    - Remove outliers
-- Import the prepare function from the prepare.py module and use it to prepare the data in the Final Report Notebook.
-- Plot distributions of individual variables.
-___
+- The raw data was cleaned (lowercased all characters, normalized unicode characters, removed non-ASCII characters)
+- Stop words were removed
+- New columns were created for cleaned, stemmed, and lemmatized readme text
+- The four most common programming language categories were JavaScript, Java, Python, and C++: the remaining languages were placed into the 'other' category
+- Data was split into train, validate, and test datasets
 
 ##### Explore
 
 [(Back to top)](#table-of-contents)
 
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-- Answer key questions, my hypotheses, and figure out the features that can be used in a regression model to best predict the target variable. 
-- Run statistical tests in data exploration. Document my hypotheses, set an alpha before running the tests, and document the findings well.
-- Create visualizations and run statistical tests that work toward discovering variable relationships (independent with independent and independent with dependent). 
-- Summarize my conclusions, provide clear answers to my specific questions, and summarize any takeaways/action plan from the work above.
+- Answer key questions, observe trends, and identify possible predictors
+- Create visualizations that show relationships between the variables
+- Create stacked bar charts showing the most commonly used words in the readme's
+- Create word clouds to visualize the most common words
+- Use KBest and RFE to identify the most powerful predictors
 ___
 
 ##### Model and Evaluate
@@ -230,15 +201,10 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 ### Reproduce My Project
 
----
-
 [(Back to top)](#table-of-contents)
  
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-- [x] Read this README.md
-- [ ] Download the modules (.py files), and final_report.ipynb files into your working directory
-- [ ] Download complete dataset from Kaggle at this [link](https://www.kaggle.com/ananaymital/us-used-cars-dataset?select=used_cars_data.csv) and save in same repo as above files
+- [ ] Read this readme.md
+- [ ] Clone the repo containing this readme file ( https://github.com/team-nlp-project/team-nlp-project )
+- [ ] Create your own 'env.py' file which defines the credentials 'github_token' and 'github_username'
 - [ ] Run the final_report.ipynb notebook
 
