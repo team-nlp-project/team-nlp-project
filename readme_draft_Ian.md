@@ -40,52 +40,41 @@
 
 - Create machine learning models that determine the programming language used within Github repos
 - Analyze the repo's readme's with natural language processing (NLP) techniques
+- Examine the 500 most forked repos on Github
 - Document each stage of the data science pipeline for this project
 - Document code, hypothesises, statistical testing, exploration, modeling, key findings, and takeaways
+___
 
 #### Conclusions and Takeaways 
 
 [(Back to top)](#table-of-contents)
 
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-- The best drivers identified were:
-    - `back_legroom`
-    - `city_fuel_economy`
-    - `engine_displacement`
-    - `fuel_tank_volume`
-    - `height`
-    - `highway_fuel_economy`
-    - `horsepower`
-    - `length`
-    - `maximum_seating`
-    - `mileage`
-    - `wheelbase`
-    - `width`
-    - `year`
-
-- Best-peforming model outperformed basline by:
-    - Having an RMSE value that was 9,172 dollars less
-    - R^2 improvement over baseline from 0 to 0.89
+- Models were developed that can predict the programming language by using NLP techniques to analyse the readme
+- The most accurate model was logistic regression
+- The top four most common programming languages tend to use different words in their readme's, the most commonly used words tend to be related to projects that frequently use that programming language
+- Our analysis of the readme's implies that certain themes may be more popular with different programming languages
+___
 
 #### Next Steps and Recommendations
 
 [(Back to top)](#table-of-contents)
 
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-- Try more combinations of categorical features to see if I can optimize performance
-- Do more nuanced imputation using means/modes of subgroups instead of just means/modes of whole population
-- Try less imputation and see how that affects model performance (drop more nulls)
+- Future work would include increasing the number of predicted programming languages beyond just the top four most commonly used programming languages
+___
 
 #### Audience
+
+[(Back to top)](#table-of-contents)
+
 - Members of the data science community who have at least basic knowledge of NLP.
+___
 
 #### Project Context
 - The dataset was obtained by scraping Github for readme files
-- The functions used to obtain the data are contained within the acquire.py
+- The 500 most forked repo's on Github were examined
+- The functions used to obtain the data are contained within the accessory .py files
+- The readme's were examined using NLP techniques
+___
 
 #### Data Dictionary
 
@@ -114,6 +103,7 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 - Are there specific words or phrases that can be used as predictors for programming language?
 - Are there words or phrases that have strong positive correlation with specific programming language(s)?
 - Are there words or phrases that have strong negative correlation with specific programming language(s)?
+___
 
 #### Formal Hypotheses
 
@@ -152,6 +142,7 @@ ___
 
 - Acquired the raw data by web-scraping Github
 - Used the Github proprietary API for web-scaping Github
+- The 500 most forked repo's on Github were used as data sources
 - The raw data for each repo included the URL, the readme, and the programming language
 - A local copy of the raw data was cached
 ___
@@ -165,37 +156,43 @@ ___
 - New columns were created for cleaned, stemmed, and lemmatized readme text
 - The four most common programming language categories were JavaScript, Java, Python, and C++: the remaining languages were placed into the 'other' category
 - Data was split into train, validate, and test datasets
+___
 
 ##### Explore
 
 [(Back to top)](#table-of-contents)
 
-- Answer key questions, observe trends, and identify possible predictors
-- Create visualizations that show relationships between the variables
-- Create stacked bar charts showing the most commonly used words in the readme's
-- Create word clouds to visualize the most common words
-- Use KBest and RFE to identify the most powerful predictors
+- Created bar charts, word clouds, and word counts to explore the train data
+- The four most common programming languages were JavaScript, Java, Python, and C++
+- One of the most common words in the readme's was the programming language used
+- Some of the most common words for JavaScript were function, good, and bad
+- Some of the most common words for Java were terms related to the cloud and android
+- Some of the most common words for Python were terms related to video analysis and data science
+- Python readme's had higher word counts, on average
+- The exploration of the readme's showed that these programming languages tend to be used for different purposes
 ___
 
 ##### Model and Evaluate
 
 [(Back to top)](#table-of-contents)
 
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-- Establish a baseline accuracy to determine if having a model is better than no model and train and compare at least 4 different models. Document these steps well.
-- Train (fit, transform, evaluate) multiple models, varying the algorithm and/or hyperparameters you use.
-- Compare evaluation metrics across all the models you train and select the ones you want to evaluate using your validate split.
-- Feature Selection (after initial iteration through pipeline): Are there any variables that seem to provide limited to no additional information? If so, remove them.
-- Based on the evaluation of the models using the train and validate datasets, choose the best model to try with the test data, once.
-- Test the final model on the out-of-sample data (the testing dataset), summarize the performance, interpret and document the results.
+- Models were developed on train dataset, tuned in validate dataset, and the best performing model was used on the test dataset
+- Random states were set to ensure reproducibility
+- The models used were decision tree, random forest, logistic regression, and K nearest neighbors
+- The models were run on cleaned, cleaned + stemmed, and cleaned + lemmatized readme text
+- The best performing model was logistic regression, which beat the baseline by 31%
 
 ---
 
 ### Conclusion and Next Steps
 
 [(See Executive Summary)](#executive-summary)
+
+- Models were developed that can predict the programming language by using NLP techniques to analyse the readme
+- The most accurate model was logistic regression
+- The top four most common programming languages tend to use different words in their readme's, the most commonly used words tend to be related to projects that frequently use that programming language
+- Our analysis of the readme's implies that certain themes may be more popular with different programming languages
+- Future work would include increasing the number of predicted programming languages beyond just the top four most commonly used programming languages
 
 ---
 
