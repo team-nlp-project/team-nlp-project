@@ -55,7 +55,7 @@ ___
 [(Back to top)](#table-of-contents)
 
 - Models were developed that can predict the programming language by using NLP techniques to analyse the readme
-- The most accurate model was logistic regression
+- The best performing model based on highest validate accuracy in conjunction with least level of overfit is the Logistic Regression Model using clean (not stemmed or lemmatized) data, TFIDF vectorization, and the top 10 features for each class (40 total) that were discovered in exploration.
 - The top four most common programming languages tend to use different words in their readme's, the most commonly used words tend to be related to projects that frequently use that programming language
 - Our analysis of the readme's implies that certain themes may be more popular with different programming languages
 ___
